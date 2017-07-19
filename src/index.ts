@@ -8,7 +8,7 @@ const tmpFolder = process.env.TMP_FOLDER || os.tmpdir();
 export class LambdaBinaryHelper {
   private readonly binaryPath: string;
 
-  static async prepare(gzippedBinaryPath:string, binaryName:string) {
+  static prepare(gzippedBinaryPath:string, binaryName:string) {
     return new Promise((resolve: (value: LambdaBinaryHelper) => void, reject: (reason: any) => void) => {
       if (!gzippedBinaryPath) {
         return reject(new Error('Missing gzippedBinaryPath'))
@@ -32,7 +32,7 @@ export class LambdaBinaryHelper {
   }
 
   // check if binary exist at tmp location
-  async checkBinary() {
+  checkBinary() {
     return new Promise((resolve: (value: boolean) => void, reject: (reason: any) => void) => {
       fs.access(this.binaryPath, fs.constants.R_OK & fs.constants.X_OK, (err) => {
         if (err) {
@@ -45,7 +45,7 @@ export class LambdaBinaryHelper {
   }
 
   // gunzip binary to tmp location
-  async gunzip() {
+  gunzip() {
     return new Promise((resolve: (value: boolean) => void, reject: (reason: any) => void) => {
       // cat gzipfile.gz | gzip -c -d > /tmp/${this.binaryName}
       childProcess.exec(`cat ${this.gzippedBinaryPath} | gzip -c -d > ${this.binaryPath}`, (err) => {
@@ -58,7 +58,7 @@ export class LambdaBinaryHelper {
     });
   }
 
-  async makeExecutable() {
+  makeExecutable() {
     return new Promise((resolve: (value: boolean) => void, reject: (reason: any) => void) => {
       fs.chmod(this.binaryPath, '0700', (err) => {
         if (err) {
@@ -71,7 +71,7 @@ export class LambdaBinaryHelper {
   }
 
   // execute binary at tmp location with arguments
-  async execute(args: string[]) {
+  execute(args: string[]) {
     return new Promise((resolve: (value: boolean) => void, reject: (reason: any) => void) => {
       const process = childProcess.spawn(this.binaryPath, args);
       process.stdout.on('data', (buffer) => {
