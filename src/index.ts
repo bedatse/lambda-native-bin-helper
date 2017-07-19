@@ -36,7 +36,11 @@ export class LambdaBinaryHelper {
     return new Promise((resolve: (value: boolean) => void, reject: (reason: any) => void) => {
       fs.access(this.binaryPath, fs.constants.R_OK & fs.constants.X_OK, (err) => {
         if (err) {
-          reject(err);
+          if (err.code === 'ENOENT') {
+            resolve(false);
+          } else {
+            reject(err);
+          }
         } else {
           resolve(true);
         }
