@@ -6,5 +6,5 @@ export declare class LambdaBinaryHelper {
     checkBinary(): Promise<boolean>;
     gunzip(): Promise<boolean>;
     makeExecutable(): Promise<boolean>;
-    execute(args: string[]): Promise<boolean>;
+    execute(args?: string[]): Promise<boolean>;
 }

@@ -45,17 +45,17 @@ describe('LambdaBinaryHelper', () => {
   it('should fail to prepare with an inexisting gzippedBinaryPath',
     async () => {
       try {
-        await LambdaBinaryHelper.prepare('._test/inexist-works.sh.gz', 'itworks.sh');
+        await LambdaBinaryHelper.prepare('test/inexist-works.sh.gz', 'itworks.sh');
         fail('should not reach here');
       } catch (err) {
-        expect(err.message).toEqual('ENOENT: no such file or directory, access \'._test/inexist-works.sh.gz\'');
+        expect(err.message).toEqual('ENOENT: no such file or directory, access \'test/inexist-works.sh.gz\'');
       }
     }
   );
 
   it('should be able to prepare properly',
     async () => {
-      lambdaBinary = await LambdaBinaryHelper.prepare('._test/itworks.sh.gz', 'itworks.sh');
+      lambdaBinary = await LambdaBinaryHelper.prepare('test/itworks.sh.gz', 'itworks.sh');
     }
   );
 
@@ -111,7 +111,7 @@ describe('LambdaBinaryHelper', () => {
   it('should be able to get return code when return code is not 0',
     async () => {
       try {
-        const itDoesntWork = await LambdaBinaryHelper.prepare('._test/it-does-not-work.sh.gz', 'itdontwork.sh');
+        const itDoesntWork = await LambdaBinaryHelper.prepare('test/it-does-not-work.sh.gz', 'itdontwork.sh');
         await itDoesntWork.gunzip();
         await itDoesntWork.makeExecutable();
         const result = await itDoesntWork.execute();
