@@ -1,6 +1,6 @@
 {
   "name": "lambda-native-binary-helper",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Amazon AWS Lambda binary executor",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
