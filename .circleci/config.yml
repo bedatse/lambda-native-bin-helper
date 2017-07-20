@@ -3,10 +3,7 @@ version: 2
 defaults: &defaults
   working_directory: /tmp/lambda-native-bin-helper
   docker:
-    - image: circleci/node:6
-      environment:
-        YARN_CACHE_FOLDER: /tmp/yarn-cache
-    - image: circleci/node:8
+    - image: circleci/node:6.10.2
       environment:
         YARN_CACHE_FOLDER: /tmp/yarn-cache
 
