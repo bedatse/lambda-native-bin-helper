@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -d -p src/tsconfig.json",
-    "watch": "tsc -w -d -p src/tsconfig.json"
+    "test": "jest --coverage --config jest.json",
+    "build": "tsc -d",
+    "watch": "tsc -w -d"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,12 @@
   },
   "homepage": "https://github.com/bedatse/lambda-native-binary-helper#readme",
   "devDependencies": {
+    "@types/jest": "^20.0.4",
     "@types/node": "^8.0.14",
+    "jest": "^20.0.4",
+    "nyc": "^11.0.3",
+    "ts-jest": "^20.0.7",
+    "tslint": "^5.5.0",
     "typescript": "^2.4.1"
   }
 }
