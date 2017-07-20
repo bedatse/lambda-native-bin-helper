@@ -70,18 +70,12 @@ export class LambdaBinaryHelper {
   }
 
   // execute binary at tmp location with arguments
-  execute(args: string[]) {
+  execute(args: string[] = []) {
     return new Promise((resolve: (value: boolean) => void, reject: (reason: any) => void) => {
       const process = childProcess.spawn(this.binaryPath, args);
-      process.stdout.on('data', (buffer) => {
-        console.log(buffer.toString());
-      });
-      process.stdout.on('data', (buffer) => {
-        console.log(buffer.toString());
-      });
       process.on('close', (code) => {
         if (code !== 0) {
-          reject(code);
+          reject(new Error(`Child process ended with error code: ${code}`));
         } else {
           resolve(true);
         }

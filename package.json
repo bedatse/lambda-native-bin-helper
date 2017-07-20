@@ -6,8 +6,8 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "test": "jest --coverage --config jest.json",
-    "build": "tsc -d",
-    "watch": "tsc -w -d"
+    "build": "tsc -d -p tsconfig.build.json",
+    "watch": "tsc -w -d -p tsconfig.build.json"
   },
   "repository": {
     "type": "git",
